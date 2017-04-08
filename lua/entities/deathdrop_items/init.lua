@@ -1,6 +1,6 @@
-local model = "" -- What model should it be?
-local classname = "dead_items_nirurp" -- This should be the name of the folder containing this file.
-local ShouldSetOwner = true -- Set the entity's owner?
+local model = "" 
+local classname = "deathdrop_items"
+local ShouldSetOwner = true 
 
 -------------------------------
 AddCSLuaFile( "cl_init.lua" )
@@ -60,11 +60,7 @@ function ENT:Use( activator, caller )
 	
 				for weapon, v in pairs (Items) do
 				
-				
-				--[[dropthiswep = ents.Create(v)
-				dropthiswep:SetPos(droppos)
-				dropthiswep:Spawn()
-				caller:dropDRPWeapon(dropthiswep)]]--
+
 				caller:Give(v)
 				print("Give: "..v)
 				self:Remove()
@@ -99,7 +95,4 @@ function ENT:PhysicsCollide( data, phys )
 end
 function ENT:OnRemove() 
 
-
-
-				--timer.Remove(self)
 end
