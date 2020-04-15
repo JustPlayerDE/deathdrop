@@ -51,7 +51,6 @@ function droptheweapon(ply)
         local bag = ents.Create("deathdrop_items")
         bag:SetModel("models/props_junk/cardboard_box001a.mdl")
         bag:SetPos(ply:GetPos() + Vector(0, 0, 30))
-        bag:SetUseType(SIMPLE_USE)
         bag.items = ItemBag
         bag.Owner = ply
         bag:Spawn()
