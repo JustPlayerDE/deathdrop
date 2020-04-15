@@ -37,6 +37,9 @@ end
 -- On use --
 ------------
 function ENT:Use(activator, caller)
+    if self.Disable then return end -- just to be sure
+    self.Disable = true
+
     if IsValid(caller) and caller:IsPlayer() then
         for _, class in pairs(self.items) do
             DEATHDROP.log("Giving " .. class .. " to " .. tostring(caller), true)
