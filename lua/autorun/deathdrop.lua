@@ -1,4 +1,5 @@
 DEATHDROP = DEATHDROP or {}
+DEATHDROP.DEBUG = true
 DEATHDROP.enabled = true -- 1 = Enabled; 0 = Disabled
 DEATHDROP.blacklist = { -- Here the entity names of the Weapons that you dont want to drop on death
     "weapon_fist",
@@ -25,6 +26,11 @@ DEATHDROP.blacklist = { -- Here the entity names of the Weapons that you dont wa
 --[[
     DO NOT TOUCH
 ]]
+function DEATHDROP.log(str, debug)
+    if debug and not DEATHDROP.DEBUG then return end
+    print("[DEATHDROP" .. (debug and " DEBUG" or "") .. "] " .. tostring(str))
+end
+
 local RPExtraTeams = RPExtraTeams or {}
 
 function droptheweapon(ply)
