@@ -57,6 +57,7 @@ function droptheweapon(ply)
         bag.items = ItemBag
         bag.Owner = ply
         bag:Spawn()
+        DEATHDROP.log("Created Bag #" .. bag:EntIndex() .. " containing " .. #bag.items .. " items.", true)
     end
 end
 

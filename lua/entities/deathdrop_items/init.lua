@@ -57,6 +57,7 @@ function ENT:Think()
     self.CreationTime = self.CreationTime or CurTime()
 
     if self.CreationTime + DEATHDROP.removalTime < CurTime() then
+        DEATHDROP.log("Removed Bag #" .. self:EntIndex() .. " containing " .. #self.items .. " items.", true)
         self:Remove()
     end
 end
