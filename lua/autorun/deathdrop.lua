@@ -57,6 +57,7 @@ function droptheweapon(ply)
         bag:Spawn()
     end
 end
+
 function toggledropweps(caller)
     if caller:EntIndex() == 0 or caller:IsAdmin() then
         DEATHDROP.enabled = not DEATHDROP.enabled

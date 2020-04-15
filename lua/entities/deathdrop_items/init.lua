@@ -1,40 +1,19 @@
-local model = ""
-local classname = "deathdrop_items"
-local ShouldSetOwner = true
 -------------------------------
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 
 -------------------------------
---------------------
--- Spawn Function --
---------------------
-function ENT:SpawnFunction(ply, tr)
-    if (not tr.Hit) then return end
-    local SpawnPos = tr.HitPos + tr.HitNormal * 25
-    local ent = ents.Create(classname)
-    ent:SetPos(SpawnPos)
-    ent:Spawn()
-    ent:Activate()
-
-    if ShouldSetOwner then
-        ent.Owner = ply
-    end
-
-    return ent
-end
 
 ----------------
 -- Initialize --
 ----------------
 function ENT:Initialize()
-    self.Entity:SetCollisionGroup(11)
-    self.Entity:SetModel(model)
-    self.Entity:PhysicsInit(SOLID_VPHYSICS)
-    self.Entity:SetMoveType(MOVETYPE_VPHYSICS)
-    self.Entity:SetSolid(SOLID_VPHYSICS)
-    local phys = self.Entity:GetPhysicsObject()
+    self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+    self:PhysicsInit(SOLID_VPHYSICS)
+    self:SetMoveType(MOVETYPE_VPHYSICS)
+    self:SetSolid(SOLID_VPHYSICS)
+    local phys = self:GetPhysicsObject()
 
     if (phys:IsValid()) then
         phys:Wake()
@@ -51,7 +30,7 @@ end
 -- Take Damage -- 
 -----------------
 function ENT:OnTakeDamage(dmginfo)
-    self.Entity:TakePhysicsDamage(dmginfo)
+    self:TakePhysicsDamage(dmginfo)
 end
 
 ------------
@@ -59,15 +38,12 @@ end
 ------------
 function ENT:Use(activator, caller)
     if IsValid(caller) and caller:IsPlayer() then
-        local Items = self.items
-
-        for weapon, v in pairs(Items) do
-            caller:Give(v)
-            print("Give: " .. v)
-            self:Remove()
+        for _, class in pairs(self.items) do
+            DEATHDROP.log("Giving " .. class .. " to " .. tostring(caller), true)
+            caller:Give(class)
         end
 
-        caller:ChatPrint("Du hast die sachen von " .. self.Owner:Name() .. " gefunden!")
+        self:Remove()
     end
 end
 
@@ -75,13 +51,7 @@ end
 -- Think --
 -----------
 function ENT:Think()
-end
-
------------
--- Touch --
------------
-function ENT:Touch(ent)
-    if ent:IsValid() and ent:IsPlayer() then end
+    -- Removing after some time?
 end
 
 --------------------
@@ -91,7 +61,4 @@ function ENT:PhysicsCollide(data, phys)
     if (data.Speed > 100) then
         self:EmitSound(Sound("Flashbang.Bounce"))
     end
-end
-
-function ENT:OnRemove()
 end
