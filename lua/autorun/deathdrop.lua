@@ -1,6 +1,6 @@
 DEATHDROP = DEATHDROP or {}
 
-DEATHDROP.DEBUG = true
+DEATHDROP.DEBUG = false
 DEATHDROP.enabled = true -- 1 = Enabled; 0 = Disabled
 DEATHDROP.removalTime = 120 -- in seconds
 
