@@ -29,6 +29,11 @@ DEATHDROP.blacklist = { -- Here the entity names of the Weapons that you dont wa
 --[[
     DO NOT TOUCH
 ]]
+local function shouldDrop(tbl, swep)
+    if not isstring(swep) then return true end
+    return not table.HasValue(tbl, swep)
+end
+
 function DEATHDROP.log(str, debug)
     if debug and not DEATHDROP.DEBUG then return end
     print("[DEATHDROP" .. (debug and " DEBUG" or "") .. "] " .. tostring(str))
@@ -45,7 +50,7 @@ function droptheweapon(ply)
     for k, v in pairs(ply:GetWeapons()) do
         local SWEPClass = v:GetClass()
 
-        if not (table.HasValue(DEATHDROP.blacklist, SWEPClass) or table.HasValue(PlyTeam.weapons, SWEPClass)) then
+        if shouldDrop(DEATHDROP.blacklist, SWEPClass) and shouldDrop(PlyTeam.weapons, SWEPClass) then
             table.insert(ItemBag, SWEPClass)
         end
     end
