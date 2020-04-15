@@ -1,6 +1,9 @@
 DEATHDROP = DEATHDROP or {}
+
 DEATHDROP.DEBUG = true
 DEATHDROP.enabled = true -- 1 = Enabled; 0 = Disabled
+DEATHDROP.removalTime = 120 -- in seconds
+
 DEATHDROP.blacklist = { -- Here the entity names of the Weapons that you dont want to drop on death
     "weapon_fist",
     "weapon_gpee",

@@ -54,7 +54,11 @@ end
 -- Think --
 -----------
 function ENT:Think()
-    -- Removing after some time?
+    self.CreationTime = self.CreationTime or CurTime()
+
+    if self.CreationTime + DEATHDROP.removalTime < CurTime() then
+        self:Remove()
+    end
 end
 
 --------------------
