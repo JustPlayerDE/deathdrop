@@ -48,7 +48,7 @@ function droptheweapon(ply)
     end
 
     if table.Count(ItemBag) > 0 then
-        local bag = ents.Create("dead_items_nirurp")
+        local bag = ents.Create("deathdrop_items")
         bag:SetModel("models/props_junk/cardboard_box001a.mdl")
         bag:SetPos(ply:GetPos() + Vector(0, 0, 30))
         bag:SetUseType(SIMPLE_USE)
