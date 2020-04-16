@@ -18,12 +18,6 @@ function ENT:Initialize()
     if (phys:IsValid()) then
         phys:Wake()
     end
-
-    self.time = timer.Simple(300, function()
-        if self:IsValid() then
-            self:Remove()
-        end
-    end)
 end
 
 -----------------
